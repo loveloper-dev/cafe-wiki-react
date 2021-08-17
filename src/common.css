@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.justify-sb {
+    justify-content: space-between;
+}
+
+.bg-gray {
+    background-color: #555 !important;
+}
+
+.txt-white {
+    color: #fff !important;
+}
+
+.blind{position:absolute !important;clip:rect(0 0 0 0) !important;width:1px !important;height:1px !important;margin:-1px !important;overflow:hidden !important}
+.table thead.blind{position:static;font-size:0} /* 테이블 thead blind 버그해결 */
+.clearbx:after,.clearfix:after{content:'';clear:both;display:table}
+.ellipsis{overflow:hidden;white-space:nowrap;word-break:break-all;text-overflow:ellipsis}
+.no_ellipsis{white-space:normal !important}
+.no_ellipsis2{white-space:normal !important;text-overflow:clip !important;}
+.us_none{-webkit-user-select:none !important;-moz-user-select:none !important;-ms-user-select:none !important;user-select:none !important}
+.mw_auto{min-width:auto}
+.w_auto{width:auto !important}
+.of_hidden{overflow:hidden !important}
+.of_visible{overflow:visible !important}
+input:disabled{-webkit-text-fill-color:#8d8d8d;opacity:1}

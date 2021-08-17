@@ -1,0 +1,79 @@
+.menu-item {
+    width: 22%;
+    border-radius: 0.3rem;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.05) 3px 3px 3px;
+    overflow: hidden;
+}
+
+.menu-item > a {
+    display: block;
+    padding: 2rem;
+    width: 100%;
+}
+
+.brand-logo-wrap {
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 4rem;
+
+    /* 가/세로 중앙 정렬 */
+    justify-content: center;
+    align-item: center;
+}
+
+.brand-logo-wrap img {
+    display: block;
+    width: 80%;
+    align-self: center;
+}
+
+.menu-image-wrap {
+    margin-bottom: 1rem;
+    height: 220px;
+}
+
+.menu-image-wrap img {
+    display: block;
+    width: 100%;
+}
+
+
+/* 음료명 */
+.menu-name {
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #555555;
+}
+
+.menu-icon-wrap p {
+    margin: 0;
+    width: 18%;
+    font-size: 1.3rem;
+}
+
+.menu-icon-wrap > p > img {
+    display: block;
+    width: 100%;
+}
+
+.menu-icon-wrap p.star-rating-wrap {
+    align-self: center;
+    width: 33%;
+}
+
+.menu-icon-wrap p.star-rating-wrap span:nth-of-type(2) {
+    padding-top: 0.3rem;
+    align-self: center;
+    font-weight: bold;
+    color: goldenrod;
+}
+
+.menu-icon-wrap p.star-rating-wrap span img {
+    display: block;
+    width: 90%;
+}
+
+.menu-icon-wrap .heart-rating-wrap {
+    align-self: center;
+}

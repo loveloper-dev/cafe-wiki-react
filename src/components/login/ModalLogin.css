@@ -1,0 +1,23 @@
+.ui.modal {
+  width: 35rem;
+}
+
+.ui.modal > .header {
+  text-align: center;
+}
+
+.ui.modal > .image.content > .description {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ui.modal > .image.content > .description > label {
+  margin-right: 1rem;
+  flex-basis: 1.5rem;
+  font-size: 1.3rem;
+  align-self: center;
+}
+
+.ui.modal > .image.content > .description > input {
+  flex-basis: 50%;
+}

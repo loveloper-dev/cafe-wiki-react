@@ -1,0 +1,24 @@
+header {
+    padding-top: 1.5rem;
+    width: 100%;
+    /*background-color: #eee;*/
+}
+
+.main-logo {
+    width: 17rem;
+    height: 5rem;
+    /*background-color: #ccc;*/
+}
+
+.ui.button.login-box {
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+    align-self: flex-end;
+    /*background-color: #966a5b;*/
+}
+
+/*.login-box img {*/
+/*   display: block;*/
+/*    width: 100%;*/
+/*}*/

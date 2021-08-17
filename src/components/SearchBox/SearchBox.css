@@ -1,0 +1,48 @@
+.search-box {
+    margin-bottom: 3.5rem;
+    height: 3.5rem;
+}
+
+.ui.selection.dropdown.select {
+    padding: 1.1rem 0 0 1.1rem;
+    min-height: auto;
+    border: 1px solid #eac7ad;
+    font-size: 1.2rem;
+}
+
+.ui.dropdown>.dropdown.icon {
+    font-family: Dropdown !important;
+}
+
+.ui.input.search-input {
+    width: 45rem;
+    font-size: 1.2rem;
+}
+
+.ui.input.search-input input {
+    border: 1px solid #eac7ad;
+}
+
+#inputSearch {
+    width: 10rem;
+    background-color: #eac7ad;
+    font-size: 1.2rem;
+    color:#966a5b
+}
+
+#inputSearch span{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 1.5rem;
+    color: #966a5b;
+}
+
+#btnSearch {
+    width: 7rem;
+    background-color: #966a5b;
+    font-size: 1.2rem;
+}
+
+/*.big-coffee {*/
+/*    font-size: 50px;*/
+/*}*/
