@@ -40,10 +40,14 @@ function ModalLogin() {
       // token에서 userInfo 추출
       const decodedJwt = jwt_decode(jwt);
       const userInfo = decodedJwt.userInfo;
-      console.log("userInfo", userInfo);
+
+      dispatch(userActions.setUser(userInfo)); // redux에 userInfo 저장 - redux test
 
       // localstorage 등 중에 userInfo 저장
-      dispatch(userActions.setUser(userInfo)); // redux에 userInfo 저장
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+
+      // 닫기
+      setOpen(false);
     });
   };
 
@@ -52,7 +56,6 @@ function ModalLogin() {
   };
 
   const handleInputPswd = (e) => {
-    console.log(e.target.value);
     setPswd(e.target.value);
   };
 
