@@ -26,7 +26,7 @@ function ModalLogin() {
   const login = () => {
     axios({
       method: "POST",
-      url: "http://localhost:8080/login",
+      url: "https://cafe-wiki-spring.herokuapp.com/login",
       data: {
         email: email,
         pswd: pswd,
