@@ -6,7 +6,9 @@ function MenuList() {
   const [list, setList] = useState([]);
 
   return (
-    <ul className="flex-container justify-sb">
+    <ul className="flex-container flex-wrap justify-fs">
+      <MenuItem />
+      <MenuItem />
       <MenuItem />
       <MenuItem />
       <MenuItem />

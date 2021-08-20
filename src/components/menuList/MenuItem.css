@@ -1,9 +1,15 @@
 .menu-item {
+    margin-right: 4%;
+    margin-bottom: 3rem;
     width: 22%;
     border-radius: 0.3rem;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.05) 3px 3px 3px;
     overflow: hidden;
+}
+
+.menu-item:nth-child(4n) {
+    margin-right: 0
 }
 
 .menu-item > a {
@@ -41,7 +47,7 @@
 
 /* 음료명 */
 .menu-name {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-align: center;
     color: #555555;
 }

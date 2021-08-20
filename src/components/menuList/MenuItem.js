@@ -9,7 +9,7 @@ function MenuItem(props) {
   return (
     <li className="menu-item">
       <a href="javascript:void(0)">
-        <div className="brand-logo-wrap flex-container">
+        <div className="brand-logo-wrap flex-container flex-nowrap">
           <img
             src={`${process.env.PUBLIC_URL}/images/brand-logo/${brandName}.png`}
           />
@@ -19,8 +19,8 @@ function MenuItem(props) {
             src={`${process.env.PUBLIC_URL}/images/menus/${brandName}/[110563]_20210426095937947.jpg`}
           />
         </div>
-        <h3 className="menu-name">JMT 콜드 브루</h3>
-        <div className="menu-icon-wrap flex-container justify-sb">
+        <h3 className="menu-name txt-bold">JMT 콜드 브루</h3>
+        <div className="menu-icon-wrap flex-container flex-wrap justify-sb">
           <p className="caffeine-wrap">
             <img
               src={`${process.env.PUBLIC_URL}/images/menu-info/caffeine_1.png`}

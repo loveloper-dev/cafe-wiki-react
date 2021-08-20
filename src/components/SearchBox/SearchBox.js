@@ -10,11 +10,6 @@ const countryOptions = [
   { key: "af", value: "af", text: "투썸플레이스" },
   { key: "ax", value: "ax", text: "스타벅스" },
   { key: "al", value: "al", text: "이디야커피" },
-  { key: "dz", value: "dz", text: "Algeria" },
-  { key: "as", value: "as", text: "American Samoa" },
-  { key: "ad", value: "ad", text: "Andorra" },
-  { key: "ao", value: "ao", text: "Angola" },
-  { key: "ai", value: "ai", text: "Anguilla" },
 ];
 
 function SearchBox() {
@@ -25,10 +20,10 @@ function SearchBox() {
       </div>
       <Select
         className="select"
-        placeholder="Select your country"
+        placeholder="브랜드"
         options={countryOptions}
       />
-      <Input className="search-input" placeholder="Search..." />
+      <Input className="search-input" placeholder="음료 메뉴명 혹은 키워드" />
       <Button id="inputSearch">
         <span>✛</span> 상세검색
       </Button>
