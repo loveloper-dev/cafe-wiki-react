@@ -13,7 +13,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
-import { actions as userActions } from "../../redux/reducers/user";
+// import { actions as menuActions } from "../../redux/reducers/user";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -51,7 +51,7 @@ function ModalLogin() {
       const decodedJwt = jwt_decode(jwt);
       const userInfo = decodedJwt.userInfo;
 
-      dispatch(userActions.setUser(userInfo)); // redux에 userInfo 저장 - redux test
+      // dispatch(menuActions.setUser(userInfo)); // redux에 userInfo 저장 - redux test
 
       // localstorage 등 중에 userInfo 저장
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
