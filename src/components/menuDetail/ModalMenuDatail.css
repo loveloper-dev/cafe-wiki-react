@@ -1,0 +1,122 @@
+#menuDatail.ui.modal {
+    width: 64rem;
+    overflow: hidden;
+}
+
+#menuDatail.ui.modal * {
+    font-family: Cafe24SsurroundAir;
+}
+
+#menuDatail.ui.modal > .content {
+    height: 37rem;
+}
+
+#menuDatail.ui.modal > .content > div:first-child {
+    width: 35%;
+    margin-right: 5%;
+}
+
+#menuDatail.ui.modal > .content > div:first-child .brand-logo-wrap img {
+    display: block;
+    margin: 0 auto;
+}
+
+#menuDatail.ui.modal > .content > div:first-child .menu-image-wrap img {
+    display: block;
+    width: 100%;
+}
+
+#menuDatail.ui.modal > .content > div:last-child {
+    position: relative;
+    width: 60%;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-name-ko {
+    font-size: 1.5rem;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.2rem solid #555;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label {
+    margin-right: 1rem;
+    min-width: 3rem;
+    height: 33px;
+    vertical-align: top;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.heart .ui.button {
+    width: 2.4rem;
+    padding: 0.7rem 0.6rem 0.6rem 0.6rem;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.star .ui.button {
+    padding: 0.5rem;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.star.on .ui.button {
+    background-color: #ffe680;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.heart.on .ui.button {
+    background-color: #FFC1BD;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label .ui.button img {
+    display: block;
+    height: 100%
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.ui.labeled.button >.ui.label {
+    padding-top: 0.8rem;
+    border: 2px solid #ddd;
+    color: #ccc
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.star.on.ui.labeled.button >.ui.label {
+    border: 2px solid #ffe680;
+    color:#ffd62d;
+}
+
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.heart.on.ui.labeled.button >.ui.label {
+    border: 2px solid #FFC1BD;
+    color:#E89A94;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label .ui.basic[class*="left pointing"].label:before {
+    display: none;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-desc {
+    line-height: 1.8rem;
+    font-size: 1.2rem;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-allergy-wrap {
+    position: absolute;
+    bottom: 0;
+    padding: 1rem;
+    width: 100%;
+    border: 0.2rem solid #555;
+    border-radius: 0.4rem;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-allergy-wrap .menu-allergy-title {
+    position: absolute;
+    top: -1rem;
+    padding: 0 1rem;
+    background-color: #fff;
+    font-size: 1.3rem;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-allergy-wrap ul li {
+    margin-right: 1rem;
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background-color: #ddd;
+}

@@ -1,33 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MenuItem.css";
+import ModalMenuDetail from "../menuDetail/ModalMenuDetail";
 // import * as imageList from "public/images/brand-logo";
 
 function MenuItem(props) {
   // const { brandName = "hollys" } = props; // hollys는 default값
   const { brandName = "starbucks" } = props; // hollys는 default값
   // const { brandName = "hollys_1" } = props; // hollys는 default값
+
+  const [isShow, setShow] = useState(false);
+
+  const { menuInfo } = props;
+  const [menu, setMenu] = useState(menuInfo);
+
+  const handleChangeShow = () => {
+    setShow(true);
+  };
+
   return (
     <li className="menu-item">
-      <a href="javascript:void(0)">
+      {isShow ? (
+        <ModalMenuDetail
+          open={isShow}
+          menu_idx={menu.menu_idx}
+          key={menu.menu_idx}
+          setOpen={() => setShow(false)}
+        />
+      ) : (
+        <></>
+      )}
+      <a href="javascript:void(0)" onClick={handleChangeShow}>
         <div className="brand-logo-wrap flex-container flex-nowrap">
           <img
-            src={`${process.env.PUBLIC_URL}/images/brand-logo/${brandName}.png`}
+            src={`${process.env.PUBLIC_URL}/images/brand-logo/${menu.brand_nm_en}.png`}
           />
         </div>
         <div className="menu-image-wrap">
-          <img
-            src={`${process.env.PUBLIC_URL}/images/menus/${brandName}/[110563]_20210426095937947.jpg`}
-          />
+          {/*<img src={menu.menu_img_url} />*/}
+          <img src={`${process.env.PUBLIC_URL}/images/menu-info/62.jpeg`} />
         </div>
-        <h3 className="menu-name txt-bold">JMT 콜드 브루</h3>
+        <h3 className="menu-name">{menu.menu_nm_ko}</h3>
         <div className="menu-icon-wrap flex-container flex-wrap justify-sb">
           <p className="caffeine-wrap">
-            <img
-              src={`${process.env.PUBLIC_URL}/images/menu-info/caffeine_1.png`}
-            />
-            {/*<img*/}
-            {/*  src={`${process.env.PUBLIC_URL}/images/menu-info/no-caffeine.png`}*/}
-            {/*/>*/}
+            {menu.menu_has_caffeine ? (
+              <img
+                src={`${process.env.PUBLIC_URL}/images/menu-info/caffeine_1.png`}
+              />
+            ) : (
+              <img
+                src={`${process.env.PUBLIC_URL}/images/menu-info/no-caffeine.png`}
+              />
+            )}
           </p>
           <p className="star-rating-wrap flex-container">
             <span>
@@ -35,10 +58,18 @@ function MenuItem(props) {
                 src={`${process.env.PUBLIC_URL}/images/menu-info/star.png`}
               />
             </span>
-            <span>4.9</span>
+            <span>{menu.menu_star_rating}</span>
           </p>
           <p className="heart-rating-wrap flex-container">
-            <img src={`${process.env.PUBLIC_URL}/images/menu-info/heart.png`} />
+            {menu.menu_heart_rating ? (
+              <img
+                src={`${process.env.PUBLIC_URL}/images/menu-info/heart.png`}
+              />
+            ) : (
+              <img
+                src={`${process.env.PUBLIC_URL}/images/menu-info/empty_heart.png`}
+              />
+            )}
           </p>
         </div>
       </a>

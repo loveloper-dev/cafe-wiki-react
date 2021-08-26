@@ -15,6 +15,7 @@ import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
 import { actions as userActions } from "../../redux/reducers/user";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function ModalLogin() {
   //    [변수명, setter함수]
@@ -34,33 +35,30 @@ function ModalLogin() {
   const login = () => {
     axios({
       method: "POST",
-      url: "https://cafe-wiki-spring.herokuapp.com/login",
+      // url: "https://cafe-wiki-spring.herokuapp.com/login",
+      url: "http://localhost:8080/login",
       data: {
         email: email,
         pswd: pswd,
       },
       // responseType: "type",
-    })
-      .then((res) => {
-        // cookie에 token 저장
-        const jwt = res.data.resultData;
-        setCookie("jwt", jwt, { path: "/" });
+    }).then((res) => {
+      // cookie에 token 저장
+      const jwt = res.data.resultData;
+      setCookie("jwt", jwt, { path: "/" });
 
-        // token에서 userInfo 추출
-        const decodedJwt = jwt_decode(jwt);
-        const userInfo = decodedJwt.userInfo;
+      // token에서 userInfo 추출
+      const decodedJwt = jwt_decode(jwt);
+      const userInfo = decodedJwt.userInfo;
 
-        dispatch(userActions.setUser(userInfo)); // redux에 userInfo 저장 - redux test
+      dispatch(userActions.setUser(userInfo)); // redux에 userInfo 저장 - redux test
 
-        // localstorage 등 중에 userInfo 저장
-        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      // localstorage 등 중에 userInfo 저장
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
-        // 닫기
-        setOpen(false);
-      })
-      .finally(() => {
-        window.location.reload();
-      });
+      // 닫기
+      setOpen(false);
+    });
   };
 
   const handleInputId = (e) => {
@@ -73,6 +71,7 @@ function ModalLogin() {
 
   return (
     <Modal
+      className="modal-login"
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
@@ -82,7 +81,7 @@ function ModalLogin() {
         <Modal.Description>
           <Grid textAlign="center" verticalAlign="middle">
             <Grid.Column>
-              <Header as="h2" color="teal" textAlign="center">
+              <Header as="h2" textAlign="center">
                 로그인
               </Header>
               <Form size="large">
@@ -105,17 +104,22 @@ function ModalLogin() {
                     onChange={handleInputPswd}
                   />
 
-                  <Button color="teal" fluid size="large" onClick={login}>
+                  <Button fluid size="large" onClick={login}>
                     Login
                   </Button>
                 </Segment>
               </Form>
+              <Link to="/join" onClick={() => setOpen(false)}>
+                Join Us !
+              </Link>
             </Grid.Column>
           </Grid>
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button onClick={() => setOpen(false)}>Cancel</Button>
+        <Button className="btn" onClick={() => setOpen(false)}>
+          Cancel
+        </Button>
       </Modal.Actions>
     </Modal>
   );

@@ -2,12 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { CookiesProvider } from "react-cookie";
+import { BrowserRouter } from "react-router-dom";
 
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 ReactDOM.render(
   <CookiesProvider>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </CookiesProvider>,
   document.getElementById("root")
 );

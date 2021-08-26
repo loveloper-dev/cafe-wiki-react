@@ -6,7 +6,7 @@
 }
 
 .flex-container {
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     flex-wrap: nowrap;
 }
@@ -41,6 +41,27 @@
 
 .txt-bold {
     font-family: 'Cafe24Ssurround' !important;
+}
+
+.btn {
+    border: none !important;
+    background: none !important;
+}
+
+.mg-bt-half {
+    margin-bottom: 0.5rem;
+}
+
+.mg-bt-1 {
+    margin-bottom: 1rem;
+}
+
+.mg-bt-2 {
+    margin-bottom: 2rem;
+}
+
+.ui.modal>.content {
+    padding: 3.5rem;
 }
 
 .blind{position:absolute !important;clip:rect(0 0 0 0) !important;width:1px !important;height:1px !important;margin:-1px !important;overflow:hidden !important}

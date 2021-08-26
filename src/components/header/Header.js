@@ -1,10 +1,6 @@
 import React from "react";
 import "./Header.css";
-import { ReactComponent as Login } from "./login-svg.svg";
 import ModalLogin from "../login/ModalLogin";
-import axios from "axios";
-import jwt_decode from "jwt-decode";
-import { actions as userActions } from "../../redux/reducers/user";
 import { useCookies } from "react-cookie";
 
 function Header() {

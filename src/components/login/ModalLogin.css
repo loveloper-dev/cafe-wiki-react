@@ -1,18 +1,18 @@
-.ui.modal {
+.modal-login.ui.modal {
   width: 40rem;
 }
-.ui.modal>.content {
-    padding: 3.5rem;
-}
 
-.ui.teal.header{
+.modal-login.ui.modal>.content .ui.header{
     margin-bottom: 3rem;
     font-size: 2rem;
+    color: #966a5b !important;
 }
 
-.ui.teal.button{
+.modal-login.ui.modal>.content .ui.button {
     margin-top: 2rem;
+    background-color: #966a5b;
     font-size: 1.8rem;
+    color: #fff;
 }
 /*.ui.modal > .header {*/
 /*  text-align: center;*/
@@ -34,15 +34,18 @@
 /*  flex-basis: 50%;*/
 /*}*/
 
-.ui.modal .ui.segment {
+.modal-login.ui.modal .ui.segment {
     box-shadow: none;
     border: none;
 }
 
-.ui.stacked.segment:after, .ui.stacked.segment:before, .ui.stacked.segments:after, .ui.stacked.segments:before {
+.modal-login .ui.stacked.segment:after,
+.modal-login .ui.stacked.segment:before,
+.modal-login .ui.stacked.segments:after,
+.modal-login .ui.stacked.segments:before {
     display: none;
 }
 
-.ui.fluid.input {
+.modal-login .ui.fluid.input {
     height: 3.5rem;
 }
