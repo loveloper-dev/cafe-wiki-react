@@ -26,22 +26,6 @@ function Join({ history }) {
 
   const [checkedList, setCheckedList] = useState([]);
 
-  // const [userEmailId, setUserEmailId] = useState("");
-
-  // const [userEmailAddress, setUserEmailAddress] = useState(options[0].value);
-
-  // const handleUserEmail = (key) => (e, data) => {
-  //   if (key === "user_email_id") {
-  //     setUserEmailId(data.value);
-  //   } else {
-  //     setUserEmailAddress(data.value);
-  //   }
-  //   // console.log("userInfo", userInfo);
-  //   // console.log("[Join] handleMergeUserEmail key: ", key);
-  //   // console.log("[Join] handleMergeUserEmail e: ", e);
-  //   // console.log("[Join] handleMergeUserEmail data: ", data.value);
-  // };
-
   const [userInfo, setUserInfo] = useState({
     user_email_id: "",
     user_email_address: options[0].value,
@@ -49,12 +33,8 @@ function Join({ history }) {
     user_nm: "",
     user_allergy: "",
   });
-  // console.log("userInfo", userInfo);
 
   const handleChangeUserInfo = (key) => (e, data) => {
-    // console.log("[Join] handleChangeUserInfo key: ", key);
-    // const value = e.target.value;
-    // console.log("[Join] handleChangeUserInfo value: ", value);
     setUserInfo((prevUserInfo) => ({
       ...prevUserInfo,
       [key]: data.value,
@@ -69,28 +49,15 @@ function Join({ history }) {
       url: `http://localhost:8080/allergies`,
       // responseType: "type",
     }).then((res) => {
-      // console.log("[Join] res.data.resultData: ", res.data.resultData);
       const allergyList = res.data.resultData.map((allergy) => {
         const newAllergy = { ...allergy, checked: false };
         return newAllergy;
       });
-      // console.log("[Join] allergyList: ", allergyList);
+
       setCheckedList(allergyList);
       setLoading(false); // 다시 렌더 돌면서 return 안에 있는걸 그림
     });
   }, []);
-
-  // // userInfo가 바뀌었을 때만 변화생김
-  // useEffect(() => {
-  //   return () => {
-  //     console.log("[Join] userInfo 변화");
-  //   };
-  // }, [userInfo]);
-
-  // user가 check한 알러지 항목
-  // const userAllergyList = checkedList
-  //   .filter((check) => check.checked)
-  //   .map((check) => check.value);
 
   const handleCheck = (changedValue) => {
     const newCheckList = checkedList.map((check) => {
