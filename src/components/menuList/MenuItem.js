@@ -4,10 +4,6 @@ import ModalMenuDetail from "../menuDetail/ModalMenuDetail";
 // import * as imageList from "public/images/brand-logo";
 
 function MenuItem(props) {
-  // const { brandName = "hollys" } = props; // hollys는 default값
-  const { brandName = "starbucks" } = props; // hollys는 default값
-  // const { brandName = "hollys_1" } = props; // hollys는 default값
-
   const [isShow, setShow] = useState(false);
 
   const { menuInfo } = props;

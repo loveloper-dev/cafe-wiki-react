@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Header, Image, Label, Modal } from "semantic-ui-react";
 import axios from "axios";
 import "./ModalMenuDatail.css";
-import MenuItem from "../menuList/MenuItem";
 
 function ModalMenuDetail(props) {
   const { open, setOpen } = props;

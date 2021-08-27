@@ -8,7 +8,6 @@ import Loading from "../loading/Loading";
 function MenuList() {
   const dispatch = useDispatch();
   const menuListRedux = useSelector((state) => state.menuList.menuList);
-  // const inSignedInRedux = useSelector((state) => state.MenuList.isSignedIn);
 
   const [isLoading, setLoading] = useState(true);
 

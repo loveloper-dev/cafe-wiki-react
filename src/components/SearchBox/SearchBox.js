@@ -21,10 +21,6 @@ function SearchBox() {
 
   const dispatch = useDispatch();
 
-  // const [isSignedIn, setIsSignedIn] = useState(
-  //   localStorage.getItem("userInfo")
-  // );
-
   const [searchInfo, setSearchInfo] = useState({
     brand_idx: 0,
     keyword: "",
@@ -32,14 +28,6 @@ function SearchBox() {
 
   //state = store, user = reducer 종류, isLogin = state이름
   const isLogin = useSelector((state) => state.user.isLogin);
-  // const asyncHandleChangeKeyword = async (key, value) => {
-  //   await setSearchInfo((prevSearchInfo) => ({
-  //     ...prevSearchInfo,
-  //     [key]: value,
-  //   }));
-  //
-  //   // await search();
-  // };
 
   const handleFilteringAllergy = (key) => (e, data) => {
     console.log("[SearchBox] handleFilteringAllergy key: ", key);

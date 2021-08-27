@@ -13,27 +13,20 @@ import axios from "axios";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
-// import { actions as menuActions } from "../../redux/reducers/user";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { actionCreators as userAction } from "../../redux/reducers/user";
 
-function ModalLogin(props) {
-  // const { setIsSignedIn } = props;
-
+function ModalLogin() {
   //    [변수명, setter함수]
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [pswd, setPswd] = useState("");
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.User);
-
-  console.log(user);
 
   //    [쿠키값, 쿠키setter, 쿠키삭제]          = 쿠키 초기값
   const [cookies, setCookie, removeCookie] = useCookies([""]);
-  // yarn add universal-cookie로 대체할지 고민
 
   // login 관련 테스트
   const login = () => {
@@ -55,21 +48,14 @@ function ModalLogin(props) {
       const decodedJwt = jwt_decode(jwt);
       const userInfo = decodedJwt.userInfo;
 
-      // dispatch(menuActions.setUser(userInfo)); // redux에 userInfo 저장 - redux test
-
       // localstorage 등 중에 userInfo 저장
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
-
-      // setIsSignedIn
-      // setIsSignedIn(true);
 
       // setIsSignedInRedux
       dispatch(userAction.setLogin(true));
 
       // 닫기
       setOpen(false);
-
-      // window.location.reload();
     });
   };
 

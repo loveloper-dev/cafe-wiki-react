@@ -52,7 +52,6 @@ function Join({ history }) {
       method: "GET",
       // url: "https://cafe-wiki-spring.herokuapp.com/allergies",
       url: `http://localhost:8080/allergies`,
-      // responseType: "type",
     }).then((res) => {
       const allergyList = res.data.resultData.map((allergy) => {
         const newAllergy = { ...allergy, checked: false };
@@ -105,7 +104,6 @@ function Join({ history }) {
       // url: "https://cafe-wiki-spring.herokuapp.com/join",
       url: "http://localhost:8080/join",
       data: userInfo,
-      // responseType: "type",
     }).then((res) => {
       console.log("[Join] join res: ", res);
       if (res.data.resultCode === 200) {

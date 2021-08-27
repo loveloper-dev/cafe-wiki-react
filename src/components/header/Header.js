@@ -11,19 +11,12 @@ function Header() {
 
   const [cookies, setCookie, removeCookie] = useCookies([""]);
 
-  // const [isSignedIn, setIsSignedIn] = useState(
-  //   localStorage.getItem("userInfo")
-  // );
-
   const isLogin = useSelector((state) => state.user.isLogin);
 
   const logout = () => {
     localStorage.removeItem("userInfo");
     removeCookie("jwt");
-    // setIsSignedIn(false);
-
     dispatch(userAction.setLogin(false));
-    // window.location.reload();
   };
 
   return (
@@ -33,8 +26,6 @@ function Header() {
           <Link to="/">logo</Link>
         </h1>
 
-        {/*<div className="login-box">*/}
-
         {isLogin ? (
           <button className="btn" onClick={logout}>
             로그아웃
@@ -42,11 +33,7 @@ function Header() {
         ) : (
           <ModalLogin />
         )}
-
-        {/*  /!*<img src={`${process.env.PUBLIC_URL}/images/header/login-svg.png`} />*!/*/}
-        {/*</div>*/}
       </div>
-      {/*<a href="javascript:void(0)">aa</a>*/}
     </header>
   );
 }
