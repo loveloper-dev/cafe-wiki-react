@@ -1,3 +1,8 @@
+.search-box-wrap {
+    margin-bottom: 1rem;
+}
+
+/* 검색 영역 */
 .search-box {
     margin-bottom: 3.5rem;
     height: 3.5rem;
@@ -41,6 +46,11 @@
     width: 7rem;
     background-color: #966a5b;
     font-size: 1.2rem;
+}
+
+/* 마이리스트, 알러지필터링 */
+.search-condition-wrap {
+
 }
 
 /*.big-coffee {*/

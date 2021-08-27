@@ -1,8 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Dropdown, Input, Checkbox, Button } from "semantic-ui-react";
 import axios from "axios";
+import "./Join.css";
+import Loading from "../loading/Loading";
+import { ReactComponent as Coffee } from "../SearchBox/coffee-cup-svg_1.svg";
+import { Link } from "react-router-dom";
 
 const options = [
+  { key: "@douzone.com", text: "@douzone.com", value: "@douzone.com" },
   { key: "@naver.com", text: "@naver.com", value: "@naver.com" },
   { key: "@gmail.com", text: "@gmail.com", value: "@gmail.com" },
   { key: "@nate.com", text: "@nate.com", value: "@nate.com" },
@@ -111,36 +116,57 @@ function Join({ history }) {
   };
 
   if (isLoading) {
-    return null;
+    return <Loading />;
   }
   return (
     <form className="join">
-      <Input
-        label={
-          <Dropdown
-            defaultValue="@naver.com"
-            onChange={handleChangeUserInfo("user_email_address")}
-            options={options}
+      <div className="join-header-wrap">
+        <Coffee height="6rem" />
+        <h2 className="txt-brown">회원가입</h2>
+      </div>
+      <div className="join-contents-wrap">
+        <div className="mg-bt-2">
+          <label className="txt-brown">E-mail</label>
+          <Input
+            className="join-email-wrap"
+            label={
+              <Dropdown
+                defaultValue="@douzone.com"
+                onChange={handleChangeUserInfo("user_email_address")}
+                options={options}
+              />
+            }
+            labelPosition="right"
+            onChange={handleChangeUserInfo("user_email_id")}
           />
-        }
-        labelPosition="right"
-        placeholder="E-mail"
-        onChange={handleChangeUserInfo("user_email_id")}
-      />
-      <br />
-      <Input
-        placeholder="비밀번호"
-        type="password"
-        onChange={handleChangeUserInfo("user_pswd")}
-      />
-      <br />
-      <Input placeholder="닉네임" onChange={handleChangeUserInfo("user_nm")} />
-      <br />
-      <div className="user-allergy-wrap">{checkElements}</div>
+        </div>
 
-      <Button type="button" onClick={join}>
-        회원가입
-      </Button>
+        <div className="mg-bt-2">
+          <label className="txt-brown">비밀번호</label>
+          <Input type="password" onChange={handleChangeUserInfo("user_pswd")} />
+        </div>
+
+        <div className="mg-bt-2">
+          <label className="txt-brown">닉네임</label>
+          <Input onChange={handleChangeUserInfo("user_nm")} />
+        </div>
+
+        <div className="mg-bt-2 user-allergy-wrap">
+          <label className="txt-brown user-allergy-title">
+            알레르기 해당사항
+          </label>
+          <div>{checkElements}</div>
+        </div>
+      </div>
+
+      <div className="join-btn-wrap">
+        <Button size="large" className="btn-join" type="button" onClick={join}>
+          회원가입
+        </Button>
+        <Button size="large" className="btn-cancel" type="button">
+          <Link to="/">취소</Link>
+        </Button>
+      </div>
     </form>
   );
 }

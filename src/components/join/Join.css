@@ -1,0 +1,94 @@
+.join {
+    margin: 0 auto;
+    min-width: 35rem;
+    width: 45%;
+}
+.join .join-header-wrap {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.join .join-contents-wrap {
+    margin-bottom: 5rem;
+}
+
+.join .join-contents-wrap > div > * {
+    width: 100%;
+}
+
+.join .join-contents-wrap input {
+    border: 1px solid #eac7ad
+}
+
+.join .join-contents-wrap .ui.label {
+    background-color: #eac7ad;
+}
+
+.join .join-contents-wrap .join-email-wrap > input {
+    width: 60%;
+}
+
+.join .join-contents-wrap .join-email-wrap > div {
+    width: 40%;
+}
+
+.join .join-contents-wrap .join-email-wrap > div i {
+    position: absolute !important;
+    right: 1rem;
+}
+
+.join .join-contents-wrap .ui.dropdown>.text,
+.join .join-contents-wrap .ui.dropdown>.dropdown.icon {
+   color: #fff;
+}
+
+.join .user-allergy-wrap {
+    margin-top: 3rem;
+    position: relative;
+    padding: 1.5rem 1rem 1rem 1rem;
+    border: 0.2rem solid #966a5b;
+    border-radius: 0.4rem;
+}
+
+.join .user-allergy-wrap .user-allergy-title {
+    left: -0.5rem;
+    width: initial;
+    position: absolute;
+    top: -0.8rem;
+    padding: 0 1rem 0.9rem 0.3rem;
+    background-color: #fbf8f3;
+}
+
+.join .user-allergy-wrap .ui.checkbox {
+    margin: 0 1rem 0.7rem 0;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #f5f0e8;
+}
+
+.join .user-allergy-wrap .ui.checkbox label,
+.join .user-allergy-wrap .ui.checkbox+label {
+    color: #966a5b;
+}
+
+.join .join-btn-wrap {
+    text-align: center;
+}
+
+.join .btn-join {
+    margin-right: 2rem;
+    background-color: #966a5b;
+    color: #fff;
+}
+
+.join .btn-cancel {
+    padding: 0;
+    background-color: #ddd;
+    color: #fff;
+}
+
+.join .btn-cancel > a {
+    display: block;
+    padding: .78571429em 1.5em .78571429em;
+
+}

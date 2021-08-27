@@ -16,8 +16,11 @@ import jwt_decode from "jwt-decode";
 // import { actions as menuActions } from "../../redux/reducers/user";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { actionCreators as userAction } from "../../redux/reducers/user";
 
-function ModalLogin() {
+function ModalLogin(props) {
+  // const { setIsSignedIn } = props;
+
   //    [변수명, setter함수]
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -25,6 +28,7 @@ function ModalLogin() {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.User);
+
   console.log(user);
 
   //    [쿠키값, 쿠키setter, 쿠키삭제]          = 쿠키 초기값
@@ -56,8 +60,16 @@ function ModalLogin() {
       // localstorage 등 중에 userInfo 저장
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
+      // setIsSignedIn
+      // setIsSignedIn(true);
+
+      // setIsSignedInRedux
+      dispatch(userAction.setLogin(true));
+
       // 닫기
       setOpen(false);
+
+      // window.location.reload();
     });
   };
 

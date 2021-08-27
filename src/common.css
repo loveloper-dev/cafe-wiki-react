@@ -43,6 +43,14 @@
     font-family: 'Cafe24Ssurround' !important;
 }
 
+.txt-lightBrown {
+    color: #eac7ad !important;
+}
+
+.txt-brown {
+    color: #966a5b !important;
+}
+
 .btn {
     border: none !important;
     background: none !important;
