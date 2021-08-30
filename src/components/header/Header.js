@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import ModalLogin from "../login/ModalLogin";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userAction } from "../../redux/reducers/user";
+import axios from "axios";
+import { actionCreators as menuActions } from "../../redux/reducers/menuList";
 
 function Header() {
   const dispatch = useDispatch();
@@ -12,6 +14,19 @@ function Header() {
   const [cookies, setCookie, removeCookie] = useCookies([""]);
 
   const isLogin = useSelector((state) => state.user.isLogin);
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "http://localhost:8080/allergies",
+    }).then((res) => {
+      const allergyMap = res.data.resultData.map((allergy) => {
+        allergy.isDanger = false;
+        return allergy;
+      });
+      localStorage.setItem("allergyInfo", JSON.stringify(allergyMap));
+    });
+  }, []);
 
   const logout = () => {
     localStorage.removeItem("userInfo");

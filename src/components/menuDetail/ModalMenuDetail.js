@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Button, Header, Image, Label, Modal } from "semantic-ui-react";
+import { Button, Header, Image, Label, Modal, Rating } from "semantic-ui-react";
 import axios from "axios";
 import "./ModalMenuDatail.css";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as menuActions } from "../../redux/reducers/menuList";
 
 function ModalMenuDetail(props) {
   const { open, setOpen } = props;
@@ -12,27 +14,146 @@ function ModalMenuDetail(props) {
 
   const [info, setInfo] = useState({});
 
+  const [isShowRatingStar, setIsShowRatingStar] = useState(false);
+
+  const [starRating, setStarRating] = useState(5);
+
+  const isLogin = useSelector((state) => state.user.isLogin);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    let param = {
+      menu_idx: menu_idx,
+    };
+
+    if (isLogin) {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      param = {
+        ...param,
+        ...userInfo,
+      };
+    }
+
     axios({
-      method: "GET",
+      method: "POST",
       // url: "https://cafe-wiki-spring.herokuapp.com/menus",
       url: `http://localhost:8080/menus/${menu_idx}`,
-      // responseType: "type",
+      data: param,
     }).then((res) => {
       const allergyArr =
-        res.data.resultData.menu_allergy != null
-          ? res.data.resultData.menu_allergy.split("@")
+        res.data.resultData.menu_allergy != ""
+          ? res.data.resultData.menu_allergy.split(",")
           : [];
+
+      const testAllergy = getAllergyMapArr(allergyArr, param);
+
       let resultData = res.data.resultData;
-      resultData.menu_allergy = allergyArr;
+      resultData.menu_allergy = testAllergy;
       setInfo(res.data.resultData); // 여기서는 info 찍어볼 수 없음
       setLoading(false); // 다시 렌더 돌면서 return 안에 있는걸 그림
     });
   }, []); // component mounted
 
-  function ratingHeart(param) {
-    console.log("누름", param);
+  function getAllergyMapArr(menu_allergyArr, param) {
+    const userAllergyInfo =
+      param.user_allergy != "" ? param.user_allergy.split(",") : [];
+
+    let returnAllergyMapArr = JSON.parse(
+      localStorage.getItem("allergyInfo")
+    ).filter((allergy) => {
+      for (let i = 0; i < menu_allergyArr.length; i++) {
+        if (menu_allergyArr[i] == allergy.value) {
+          return allergy;
+        }
+      }
+    });
+
+    if (userAllergyInfo.length > 0) {
+      const changedMenuAllergyMapArr = returnAllergyMapArr.map((allergy) => {
+        for (let i = 0; i < userAllergyInfo.length; i++) {
+          if (userAllergyInfo[i] == allergy.value) {
+            allergy.isDanger = true;
+          }
+          return allergy;
+        }
+      });
+
+      returnAllergyMapArr = changedMenuAllergyMapArr;
+    }
+
+    return returnAllergyMapArr;
   }
+
+  function ratingHeart(e, data) {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    axios({
+      method: "POST",
+      url: `http://localhost:8080/rating/heart/${
+        info.is_clicked_heart ? "cancel" : "save"
+      }`,
+      data: {
+        user_idx: userInfo.user_idx,
+        menu_idx: info.menu_idx,
+      },
+    }).then((res) => {
+      // detail 값 다시 불러와서 채움
+      const allergyArr =
+        res.data.resultData.menu_allergy != ""
+          ? res.data.resultData.menu_allergy.split(",")
+          : [];
+
+      const testAllergy = getAllergyMapArr(allergyArr);
+
+      let resultData = res.data.resultData;
+      resultData.menu_allergy = testAllergy;
+      setInfo(res.data.resultData);
+
+      // list쪽 수정
+      dispatch(menuActions.updateMenuList(res.data.resultData));
+    });
+  }
+
+  const showRatingStar = (e, data) => {
+    if (!info.is_clicked_star) {
+      setIsShowRatingStar(!isShowRatingStar);
+    }
+  };
+
+  const handleRate = (e, { rating, maxRating }) => {
+    setStarRating(rating);
+  };
+
+  const saveStarRating = (e, data) => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    axios({
+      method: "POST",
+      url: `http://localhost:8080/rating/star/save`,
+      data: {
+        user_idx: userInfo.user_idx,
+        menu_idx: info.menu_idx,
+        star_rating: starRating,
+      },
+    }).then((res) => {
+      // detail 값 다시 불러와서 채움
+      const allergyArr =
+        res.data.resultData.menu_allergy != ""
+          ? res.data.resultData.menu_allergy.split(",")
+          : [];
+
+      const testAllergy = getAllergyMapArr(allergyArr);
+
+      let resultData = res.data.resultData;
+      resultData.menu_allergy = testAllergy;
+      setInfo(res.data.resultData);
+
+      // list쪽 수정
+      dispatch(menuActions.updateMenuList(res.data.resultData));
+
+      // 닫기
+      setIsShowRatingStar(false);
+    });
+  };
 
   if (isLoading) {
     return null;
@@ -67,7 +188,17 @@ function ModalMenuDetail(props) {
               }`}
               labelPosition="right"
             >
-              <Button>{info.menu_has_caffeine ? "a" : "b"}</Button>
+              <Button>
+                {info.menu_has_caffeine ? (
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/menu-info/caffeine_2.png`}
+                  />
+                ) : (
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/menu-info/no_caffeine.png`}
+                  />
+                )}
+              </Button>
               <Label as="a" basic pointing="left">
                 {info.menu_has_caffeine ? "Caffeine drink" : "Caffeine Free"}
               </Label>
@@ -76,6 +207,8 @@ function ModalMenuDetail(props) {
               as="div"
               className={`btn-label star ${info.is_clicked_star ? "on" : ""}`}
               labelPosition="right"
+              onClick={showRatingStar}
+              value={info.is_clicked_star}
             >
               <Button>
                 {info.is_clicked_star ? (
@@ -92,11 +225,36 @@ function ModalMenuDetail(props) {
                 {info.menu_star_rating}
               </Label>
             </Button>
+            <div className={`star-rating-wrap ${isShowRatingStar ? "on" : ""}`}>
+              <p className="notice">※ 저장 이후 별점 수정 불가</p>
+              <Rating
+                maxRating={5}
+                defaultRating={starRating}
+                icon="star"
+                size="massive"
+                onRate={handleRate}
+              />
+              <button
+                type="button"
+                className="btn-save"
+                onClick={saveStarRating}
+              >
+                별점 저장
+              </button>
+              <button
+                type="button"
+                className="btn-cancel"
+                onClick={showRatingStar}
+              >
+                취소
+              </button>
+            </div>
             <Button
               as="div"
               className={`btn-label heart ${info.is_clicked_heart ? "on" : ""}`}
               labelPosition="right"
               onClick={ratingHeart}
+              value={info.is_clicked_heart}
             >
               <Button>
                 {info.is_clicked_heart ? (
@@ -119,7 +277,14 @@ function ModalMenuDetail(props) {
             <p className="menu-allergy-title">알레르기 정보</p>
             <ul>
               {info.menu_allergy.map((allergy) => {
-                return <li key={allergy}>{allergy}</li>;
+                return (
+                  <li
+                    key={allergy.value}
+                    className={allergy.isDanger ? "danger" : ""}
+                  >
+                    {allergy.label}
+                  </li>
+                );
               })}
             </ul>
           </div>

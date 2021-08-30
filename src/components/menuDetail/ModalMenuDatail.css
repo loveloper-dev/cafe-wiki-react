@@ -3,8 +3,8 @@
     overflow: hidden;
 }
 
-#menuDatail.ui.modal * {
-    font-family: Cafe24SsurroundAir;
+#menuDatail.ui.modal > .header {
+    font-family: Cafe24SsurroundAir
 }
 
 #menuDatail.ui.modal > .content {
@@ -36,6 +36,7 @@
 }
 
 #menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap {
+    position: relative;
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 0.2rem solid #555;
@@ -46,6 +47,12 @@
     min-width: 3rem;
     height: 33px;
     vertical-align: top;
+    font-family: Cafe24SsurroundAir
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.caffeine .ui.button {
+    padding: 0.5rem;
+    cursor: default;
 }
 
 #menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.heart .ui.button {
@@ -57,8 +64,14 @@
     padding: 0.5rem;
 }
 
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.caffeine.on .ui.button {
+    background-color: #eac7ad;
+    cursor: default;
+}
+
 #menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.star.on .ui.button {
     background-color: #ffe680;
+    cursor: default;
 }
 
 #menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.heart.on .ui.button {
@@ -76,11 +89,21 @@
     color: #ccc
 }
 
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.caffeine.ui.labeled.button >.ui.label {
+    cursor: default;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.caffeine.on.ui.labeled.button >.ui.label {
+    border: 2px solid #eac7ad;
+    color: #966a5b;
+    cursor: default;
+}
+
 #menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.star.on.ui.labeled.button >.ui.label {
     border: 2px solid #ffe680;
     color:#ffd62d;
+    cursor: default;
 }
-
 
 #menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label.heart.on.ui.labeled.button >.ui.label {
     border: 2px solid #FFC1BD;
@@ -90,6 +113,59 @@
 #menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .btn-label .ui.basic[class*="left pointing"].label:before {
     display: none;
 }
+
+/* starRating */
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .star-rating-wrap {
+    display: none;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .star-rating-wrap.on {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2rem;
+    box-shadow: rgba(149, 157, 165, 0.3) 0px 8px 24px;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    text-align: center;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .star-rating-wrap .notice {
+    margin-bottom: 1rem;
+    color: darkred;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .rating.star {
+    margin-bottom: 2rem;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .star-rating-wrap .btn-save {
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: yellowgreen;
+    color: #fff
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .star-rating-wrap .btn-cancel {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #bbb;
+    color: #fff
+}
+
+/*#menuDatail.ui.modal > .content > div:last-child .menu-icon-wrap .rating.star {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    padding: 2rem;*/
+/*    background-color: #fff;*/
+/*}*/
+
 
 #menuDatail.ui.modal > .content > div:last-child .menu-desc {
     line-height: 1.8rem;
@@ -114,9 +190,16 @@
 }
 
 #menuDatail.ui.modal > .content > div:last-child .menu-allergy-wrap ul li {
-    margin-right: 1rem;
     display: inline-block;
-    width: 2rem;
-    height: 2rem;
+    margin-right: 1rem;
+    width: 4rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
     background-color: #ddd;
+    text-align: center;
+}
+
+#menuDatail.ui.modal > .content > div:last-child .menu-allergy-wrap ul li.danger {
+    background-color: darkred;
+    color: #fff
 }
