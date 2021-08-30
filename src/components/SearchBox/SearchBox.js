@@ -148,15 +148,10 @@ function SearchBox() {
           value={keyword}
           onChange={handleChangeKeyword("keyword")}
         />
-        <Button id="inputSearch">
-          <span>✛</span> 상세검색
-        </Button>
-        <Button
-          id="btnSearch"
-          type="button"
-          className="txt-white"
-          onClick={search}
-        >
+        {/*<Button id="inputSearch">*/}
+        {/*  <span>✛</span> 상세검색*/}
+        {/*</Button>*/}
+        <Button id="btnSearch" type="button" onClick={search}>
           검색
         </Button>
       </div>

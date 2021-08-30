@@ -74,7 +74,11 @@ function ModalLogin() {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button className="login-box">Login</Button>}
+      trigger={
+        <Button className="btn-login">
+          <img src={`${process.env.PUBLIC_URL}/images/header/btn_login.png`} />
+        </Button>
+      }
     >
       <Modal.Content>
         <Modal.Description>
@@ -103,14 +107,23 @@ function ModalLogin() {
                     onChange={handleInputPswd}
                   />
 
-                  <Button fluid size="large" onClick={login}>
+                  <Button
+                    fluid
+                    size="large"
+                    onClick={login}
+                    className="btn-login"
+                  >
                     Login
                   </Button>
+                  <Link
+                    to="/join"
+                    onClick={() => setOpen(false)}
+                    className="ui button btn-join"
+                  >
+                    Join Us !
+                  </Link>
                 </Segment>
               </Form>
-              <Link to="/join" onClick={() => setOpen(false)}>
-                Join Us !
-              </Link>
             </Grid.Column>
           </Grid>
         </Modal.Description>

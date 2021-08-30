@@ -46,18 +46,21 @@ function ModalMenuDetail(props) {
           ? res.data.resultData.menu_allergy.split(",")
           : [];
 
-      const testAllergy = getAllergyMapArr(allergyArr, param);
+      const allergyMap = getAllergyMapArr(allergyArr, param);
 
       let resultData = res.data.resultData;
-      resultData.menu_allergy = testAllergy;
+      resultData.menu_allergy = allergyMap;
       setInfo(res.data.resultData); // 여기서는 info 찍어볼 수 없음
       setLoading(false); // 다시 렌더 돌면서 return 안에 있는걸 그림
     });
   }, []); // component mounted
 
   function getAllergyMapArr(menu_allergyArr, param) {
-    const userAllergyInfo =
-      param.user_allergy != "" ? param.user_allergy.split(",") : [];
+    console.log("param: ", param);
+    let userAllergyInfo = [];
+    if (param.user_allergy != null && param.user_allergy != "") {
+      userAllergyInfo = param.user_allergy.split(",");
+    }
 
     let returnAllergyMapArr = JSON.parse(
       localStorage.getItem("allergyInfo")
@@ -86,36 +89,39 @@ function ModalMenuDetail(props) {
   }
 
   function ratingHeart(e, data) {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    axios({
-      method: "POST",
-      url: `http://localhost:8080/rating/heart/${
-        info.is_clicked_heart ? "cancel" : "save"
-      }`,
-      data: {
-        user_idx: userInfo.user_idx,
+    if (isLogin) {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const param = {
+        ...userInfo,
         menu_idx: info.menu_idx,
-      },
-    }).then((res) => {
-      // detail 값 다시 불러와서 채움
-      const allergyArr =
-        res.data.resultData.menu_allergy != ""
-          ? res.data.resultData.menu_allergy.split(",")
-          : [];
+      };
+      axios({
+        method: "POST",
+        url: `http://localhost:8080/rating/heart/${
+          info.is_clicked_heart ? "cancel" : "save"
+        }`,
+        data: param,
+      }).then((res) => {
+        // detail 값 다시 불러와서 채움
+        const allergyArr =
+          res.data.resultData.menu_allergy != ""
+            ? res.data.resultData.menu_allergy.split(",")
+            : [];
 
-      const testAllergy = getAllergyMapArr(allergyArr);
+        const allergyMap = getAllergyMapArr(allergyArr, param);
 
-      let resultData = res.data.resultData;
-      resultData.menu_allergy = testAllergy;
-      setInfo(res.data.resultData);
+        let resultData = res.data.resultData;
+        resultData.menu_allergy = allergyMap;
+        setInfo(res.data.resultData);
 
-      // list쪽 수정
-      dispatch(menuActions.updateMenuList(res.data.resultData));
-    });
+        // list쪽 수정
+        dispatch(menuActions.updateMenuList(res.data.resultData));
+      });
+    }
   }
 
   const showRatingStar = (e, data) => {
-    if (!info.is_clicked_star) {
+    if (!info.is_clicked_star && isLogin) {
       setIsShowRatingStar(!isShowRatingStar);
     }
   };
@@ -125,34 +131,37 @@ function ModalMenuDetail(props) {
   };
 
   const saveStarRating = (e, data) => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    axios({
-      method: "POST",
-      url: `http://localhost:8080/rating/star/save`,
-      data: {
-        user_idx: userInfo.user_idx,
+    if (isLogin) {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const param = {
+        ...userInfo,
         menu_idx: info.menu_idx,
         star_rating: starRating,
-      },
-    }).then((res) => {
-      // detail 값 다시 불러와서 채움
-      const allergyArr =
-        res.data.resultData.menu_allergy != ""
-          ? res.data.resultData.menu_allergy.split(",")
-          : [];
+      };
+      axios({
+        method: "POST",
+        url: `http://localhost:8080/rating/star/save`,
+        data: param,
+      }).then((res) => {
+        // detail 값 다시 불러와서 채움
+        const allergyArr =
+          res.data.resultData.menu_allergy != ""
+            ? res.data.resultData.menu_allergy.split(",")
+            : [];
 
-      const testAllergy = getAllergyMapArr(allergyArr);
+        const allergyMap = getAllergyMapArr(allergyArr, param);
 
-      let resultData = res.data.resultData;
-      resultData.menu_allergy = testAllergy;
-      setInfo(res.data.resultData);
+        let resultData = res.data.resultData;
+        resultData.menu_allergy = allergyMap;
+        setInfo(res.data.resultData);
 
-      // list쪽 수정
-      dispatch(menuActions.updateMenuList(res.data.resultData));
+        // list쪽 수정
+        dispatch(menuActions.updateMenuList(res.data.resultData));
 
-      // 닫기
-      setIsShowRatingStar(false);
-    });
+        // 닫기
+        setIsShowRatingStar(false);
+      });
+    }
   };
 
   if (isLoading) {

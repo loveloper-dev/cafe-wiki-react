@@ -9,9 +9,13 @@
 }
 
 .modal-login.ui.modal>.content .ui.button {
-    margin-top: 2rem;
-    background-color: #966a5b;
     font-size: 1.8rem;
+    font-family: Cafe24SsurroundAir;
+}
+
+.modal-login.ui.modal>.content .ui.button.btn-login {
+    margin: 2rem 0;
+    background-color: #966a5b;
     color: #fff;
 }
 /*.ui.modal > .header {*/
@@ -48,4 +52,11 @@
 
 .modal-login .ui.fluid.input {
     height: 3.5rem;
+}
+
+.modal-login.ui.modal>.content .btn-join {
+    display: block;
+    background-color: yellowgreen;
+    color: #fff
+
 }

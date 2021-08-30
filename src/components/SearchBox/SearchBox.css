@@ -20,7 +20,7 @@
 }
 
 .ui.input.search-input {
-    width: 45rem;
+    width: 55rem;
     font-size: 1.2rem;
 }
 
@@ -44,9 +44,15 @@
 
 #btnSearch {
     width: 7rem;
-    background-color: #966a5b;
+    background-color: #eac7ad;
     font-size: 1.2rem;
+    color:#966a5b;
 }
+/*#btnSearch {*/
+/*    width: 7rem;*/
+/*    background-color: #966a5b;*/
+/*    font-size: 1.2rem;*/
+/*}*/
 
 /* 마이리스트, 알러지필터링 */
 .search-condition-wrap {

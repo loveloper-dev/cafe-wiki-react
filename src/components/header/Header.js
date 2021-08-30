@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userAction } from "../../redux/reducers/user";
 import axios from "axios";
-import { actionCreators as menuActions } from "../../redux/reducers/menuList";
+import { Button } from "semantic-ui-react";
 
 function Header() {
   const dispatch = useDispatch();
@@ -38,13 +38,15 @@ function Header() {
     <header>
       <div className="container flex-container justify-sb">
         <h1 className="main-logo">
-          <Link to="/">logo</Link>
+          <Link to="/">늘 마시던 걸로</Link>
         </h1>
 
         {isLogin ? (
-          <button className="btn" onClick={logout}>
-            로그아웃
-          </button>
+          <Button className="btn-logout" onClick={logout}>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/header/btn_logout.png`}
+            />
+          </Button>
         ) : (
           <ModalLogin />
         )}

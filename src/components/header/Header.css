@@ -1,5 +1,5 @@
 header {
-    padding-top: 1.5rem;
+    padding-top: 3rem;
     width: 100%;
     /*background-color: #eee;*/
 }
@@ -10,15 +10,25 @@ header {
     /*background-color: #ccc;*/
 }
 
-.ui.button.login-box {
+.main-logo a {
+    color: #333;
+    /*background-color: #ccc;*/
+}
+
+header .ui.button {
     padding: 0;
     width: 3rem;
     height: 3rem;
     align-self: flex-end;
-    /*background-color: #966a5b;*/
+    background: none;
 }
 
-/*.login-box img {*/
+header .ui.button img{
+    display: block;
+    width: 100%;
+}
+
+/*.btn-login img {*/
 /*   display: block;*/
 /*    width: 100%;*/
 /*}*/

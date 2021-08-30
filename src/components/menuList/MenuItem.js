@@ -39,11 +39,11 @@ function MenuItem(props) {
           <p className="caffeine-wrap">
             {menuInfo.menu_has_caffeine ? (
               <img
-                src={`${process.env.PUBLIC_URL}/images/menu-info/caffeine_1.png`}
+                src={`${process.env.PUBLIC_URL}/images/menu-info/caffeine_drink.png`}
               />
             ) : (
               <img
-                src={`${process.env.PUBLIC_URL}/images/menu-info/no-caffeine.png`}
+                src={`${process.env.PUBLIC_URL}/images/menu-info/caffeine_free.png`}
               />
             )}
           </p>
