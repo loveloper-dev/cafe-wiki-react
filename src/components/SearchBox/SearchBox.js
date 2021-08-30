@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Select } from "semantic-ui-react";
 import { Input } from "semantic-ui-react";
 import { Button, Checkbox, Segment } from "semantic-ui-react";
@@ -8,6 +8,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as menuActions } from "../../redux/reducers/menuList";
 import Loading from "../loading/Loading";
+import { useCookies } from "react-cookie";
 
 const countryOptions = [
   { key: 0, value: 0, text: "모든 브랜드" },
@@ -16,42 +17,117 @@ const countryOptions = [
   { key: 3, value: 3, text: "할리스 커피" },
 ];
 
-function SearchBox() {
-  const [isLoading, setLoading] = useState(false);
+const searchInfoInitialState = {
+  brand_idx: 0,
+  // keyword: "",
+};
 
-  const dispatch = useDispatch();
-
-  const [searchInfo, setSearchInfo] = useState({
-    brand_idx: 0,
-    keyword: "",
+// @title 메뉴 아이템 리스트 가져오는 API 호출 함수
+function getMenuList(params) {
+  return axios({
+    method: "POST",
+    url: "http://localhost:8080/menus",
+    data: params,
   });
+}
+
+function SearchBox() {
+  const [isLoading, setLoading] = useState(false); // loading state
+  const dispatch = useDispatch();
 
   //state = store, user = reducer 종류, isLogin = state이름
   const isLogin = useSelector((state) => state.user.isLogin);
 
+  const [isAllergyFiltering, setIsAllergyFiltering] = useState(false);
+  const [isShowOnlyHeartDrink, setIsShowOnlyHeartDrink] = useState(false);
+  const [searchInfo, setSearchInfo] = useState(searchInfoInitialState);
+  const [keyword, setKeyword] = useState("");
+  const { brand_idx } = searchInfo;
+
+  useEffect(() => {
+    initSearchInfo();
+    setKeyword("");
+
+    if (isLogin) {
+      setIsShowOnlyHeartDrink(true);
+      setIsAllergyFiltering(true);
+    } else {
+      setIsShowOnlyHeartDrink(false);
+      setIsAllergyFiltering(false);
+    }
+  }, [isLogin]);
+
+  useEffect(() => {
+    search();
+  }, [searchInfo, isShowOnlyHeartDrink, isAllergyFiltering]);
+
   const handleFilteringAllergy = (key) => (e, data) => {
-    console.log("[SearchBox] handleFilteringAllergy key: ", key);
-    console.log("[SearchBox] handleFilteringAllergy data: ", data.checked);
+    if (key === "heart") {
+      setIsShowOnlyHeartDrink(data.checked);
+      setSearchInfo({
+        ...searchInfo,
+        isShowOnlyHeartDrink: data.checked,
+      });
+    } else {
+      setIsAllergyFiltering(data.checked);
+      setSearchInfo({
+        ...searchInfo,
+        isAllergyFiltering: data.checked,
+      });
+    }
   };
 
   const handleChangeKeyword = (key) => (e, data) => {
-    setSearchInfo((prevSearchInfo) => ({
-      ...prevSearchInfo,
-      [key]: data.value,
-    }));
+    if (key === "keyword") {
+      setKeyword(data.value);
+    } else {
+      setSearchInfo((prevSearchInfo) => ({
+        ...prevSearchInfo,
+        [key]: data.value,
+      }));
+    }
+  };
+
+  // @title 검색 옵션 초기화 함수
+  const initSearchInfo = () => {
+    setSearchInfo(searchInfoInitialState);
   };
 
   const search = () => {
     setLoading(true);
-    axios({
-      method: "POST",
-      // url: "https://cafe-wiki-spring.herokuapp.com/menus",
-      url: "http://localhost:8080/menus",
-      data: searchInfo,
-    }).then((res) => {
-      setLoading(false);
-      dispatch(menuActions.setMenuList(res.data));
-    });
+    if (isLogin) {
+      // 로그인시 API 요청
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      userInfo.jwt = localStorage.getItem("jwt"); // token 유효성 검사해야 됨
+
+      const params = {
+        ...searchInfo,
+        keyword,
+        isLogin: true,
+        isAllergyFiltering: isAllergyFiltering,
+        isShowOnlyHeartDrink: isShowOnlyHeartDrink,
+        userInfo,
+      };
+
+      getMenuList(params).then((res) => {
+        setLoading(false);
+        dispatch(menuActions.setMenuList(res.data.resultData));
+      });
+    } else {
+      // 비 로그인시 API 요청
+      const params = {
+        isLogin: false,
+        ...searchInfo,
+        keyword,
+        isShowOnlyHeartDrink: false,
+        isAllergyFiltering: false,
+      };
+
+      getMenuList(params).then((res) => {
+        setLoading(false);
+        dispatch(menuActions.setMenuList(res.data.resultData));
+      });
+    }
   };
 
   return (
@@ -64,12 +140,14 @@ function SearchBox() {
         <Select
           className="select"
           placeholder="모든 브랜드"
+          value={brand_idx}
           options={countryOptions}
           onChange={handleChangeKeyword("brand_idx")}
         />
         <Input
           className="search-input"
           placeholder="음료 메뉴명 혹은 키워드"
+          value={keyword}
           onChange={handleChangeKeyword("keyword")}
         />
         <Button id="inputSearch">
@@ -87,12 +165,20 @@ function SearchBox() {
       {isLogin ? (
         <div className="search-condition-wrap">
           <Segment compact>
-            <Checkbox toggle onClick={handleFilteringAllergy("heart")} />
-            heart 우선
+            <Checkbox
+              toggle
+              checked={isShowOnlyHeartDrink}
+              onClick={handleFilteringAllergy("heart")}
+            />
+            <span className="txt-brown">❤️ 모아보기</span>
           </Segment>
           <Segment compact>
-            <Checkbox toggle onClick={handleFilteringAllergy("allergy")} />
-            알러지 필터링
+            <Checkbox
+              toggle
+              checked={isAllergyFiltering}
+              onClick={handleFilteringAllergy("allergy")}
+            />
+            <span className="txt-brown">알러지 필터링</span>
           </Segment>
         </div>
       ) : (

@@ -30,6 +30,10 @@ function ModalMenuDetail(props) {
     });
   }, []); // component mounted
 
+  function ratingHeart(param) {
+    console.log("누름", param);
+  }
+
   if (isLoading) {
     return null;
   } // else 없어도 됨
@@ -92,6 +96,7 @@ function ModalMenuDetail(props) {
               as="div"
               className={`btn-label heart ${info.is_clicked_heart ? "on" : ""}`}
               labelPosition="right"
+              onClick={ratingHeart}
             >
               <Button>
                 {info.is_clicked_heart ? (

@@ -50,6 +50,7 @@ function ModalLogin() {
 
       // localstorage 등 중에 userInfo 저장
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      localStorage.setItem("jwt", jwt);
 
       // setIsSignedInRedux
       dispatch(userAction.setLogin(true));

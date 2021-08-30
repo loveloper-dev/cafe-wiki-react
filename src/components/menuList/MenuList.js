@@ -11,34 +11,41 @@ function MenuList() {
 
   const [isLoading, setLoading] = useState(true);
 
-  useEffect(() => {
-    let user_idx = "";
-    if (localStorage.getItem("userInfo") !== null) {
-      user_idx = JSON.parse(localStorage.getItem("userInfo")).user_idx;
-    }
-    axios({
-      method: "POST",
-      // url: "https://cafe-wiki-spring.herokuapp.com/menus",
-      url: "http://localhost:8080/menus",
-      data: {
-        user_idx: user_idx,
-      },
-    }).then((res) => {
-      dispatch(menuActions.setMenuList(res.data));
-      // setTimeout(function () {
-      setLoading(false);
-      // }, 3000);
-    });
-  }, []);
+  const isLogin = useSelector((state) => state.user.isLogin);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // useEffect(() => {
+  //   let user_idx = "";
+  //   if (localStorage.getItem("userInfo") !== null) {
+  //     user_idx = JSON.parse(localStorage.getItem("userInfo")).user_idx;
+  //   }
+  //   axios({
+  //     method: "POST",
+  //     // url: "https://cafe-wiki-spring.herokuapp.com/menus",
+  //     url: "http://localhost:8080/menus",
+  //     data: {
+  //       user_idx: user_idx,
+  //       isLogin: isLogin,
+  //     },
+  //   }).then((res) => {
+  //     dispatch(menuActions.setMenuList(res.data.resultData));
+  //     // setTimeout(function () {
+  //     setLoading(false);
+  //     // }, 3000);
+  //   });
+  // }, []);
+
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
   return (
     <ul className="flex-container flex-wrap justify-fs">
-      {menuListRedux.map((menu) => {
-        return <MenuItem key={menu.menu_idx} menuInfo={menu} />;
-      })}
+      {menuListRedux == null ? (
+        <></>
+      ) : (
+        menuListRedux.map((menu) => {
+          return <MenuItem key={menu.menu_idx} menuInfo={menu} />;
+        })
+      )}
     </ul>
   );
 }

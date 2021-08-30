@@ -50,7 +50,28 @@
 
 /* 마이리스트, 알러지필터링 */
 .search-condition-wrap {
+    text-align: right;
+}
 
+.search-condition-wrap .ui.compact.segment {
+    display: inline-block;
+    margin-left: 1.5rem;
+    padding: 1.3rem 1rem 0.6rem 1rem;
+    border: 1px solid #eac7ad;
+}
+
+.search-condition-wrap .ui.fitted.toggle.checkbox {
+    margin-right: 0.7rem;
+}
+
+.search-condition-wrap .ui.toggle.checkbox input:checked~.box:before,
+.search-condition-wrap .ui.toggle.checkbox input:checked~label:before{
+    background-color: yellowgreen !important;
+}
+
+.search-condition-wrap span {
+    display: inline-block;
+    vertical-align: top;
 }
 
 /*.big-coffee {*/

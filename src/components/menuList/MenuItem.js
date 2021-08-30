@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./MenuItem.css";
 import ModalMenuDetail from "../menuDetail/ModalMenuDetail";
-// import * as imageList from "public/images/brand-logo";
 
 function MenuItem(props) {
   const [isShow, setShow] = useState(false);
@@ -57,7 +56,7 @@ function MenuItem(props) {
             <span>{menu.menu_star_rating}</span>
           </p>
           <p className="heart-rating-wrap flex-container">
-            {menu.menu_heart_rating ? (
+            {menu.is_clicked_heart ? (
               <img
                 src={`${process.env.PUBLIC_URL}/images/menu-info/heart.png`}
               />

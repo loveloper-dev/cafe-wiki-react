@@ -82,7 +82,7 @@ function Join({ history }) {
       user_allergy: newCheckList
         .filter((check) => check.checked)
         .map((check) => check.value)
-        .join("@"),
+        .join(","),
     }));
   };
 
