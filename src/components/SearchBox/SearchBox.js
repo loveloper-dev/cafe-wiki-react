@@ -8,7 +8,6 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as menuActions } from "../../redux/reducers/menuList";
 import Loading from "../loading/Loading";
-import { useCookies } from "react-cookie";
 
 const countryOptions = [
   { key: 0, value: 0, text: "모든 브랜드" },
@@ -19,7 +18,6 @@ const countryOptions = [
 
 const searchInfoInitialState = {
   brand_idx: 0,
-  // keyword: "",
 };
 
 // @title 메뉴 아이템 리스트 가져오는 API 호출 함수
