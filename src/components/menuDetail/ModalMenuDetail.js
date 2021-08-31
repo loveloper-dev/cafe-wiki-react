@@ -56,7 +56,6 @@ function ModalMenuDetail(props) {
   }, []); // component mounted
 
   function getAllergyMapArr(menu_allergyArr, param) {
-    console.log("param: ", param);
     let userAllergyInfo = [];
     if (param.user_allergy != null && param.user_allergy != "") {
       userAllergyInfo = param.user_allergy.split(",");
@@ -78,8 +77,8 @@ function ModalMenuDetail(props) {
           if (userAllergyInfo[i] == allergy.value) {
             allergy.isDanger = true;
           }
-          return allergy;
         }
+        return allergy;
       });
 
       returnAllergyMapArr = changedMenuAllergyMapArr;
@@ -183,7 +182,8 @@ function ModalMenuDetail(props) {
             />
           </div>
           <div className="menu-image-wrap">
-            <img src={`${process.env.PUBLIC_URL}/images/menu-info/62.jpeg`} />
+            {/*<img src={`${process.env.PUBLIC_URL}/images/menu-info/62.jpeg`} />*/}
+            <img src={info.menu_img_url} />
           </div>
         </div>
         <div>
@@ -282,7 +282,11 @@ function ModalMenuDetail(props) {
             </Button>
           </div>
           <p className="menu-desc">{info.menu_desc}</p>
-          <div className="menu-allergy-wrap">
+          <div
+            className={`menu-allergy-wrap ${
+              info.menu_allergy.length > 0 ? "" : "hide"
+            } `}
+          >
             <p className="menu-allergy-title">알레르기 정보</p>
             <ul>
               {info.menu_allergy.map((allergy) => {

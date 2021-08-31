@@ -15,6 +15,18 @@
     font-size: 1.2rem;
 }
 
+.ui.selection.dropdown.select .divider.text {
+    color: #966a5b;
+}
+
+.ui.dropdown .menu>.item .text{
+    color: #d9af91;
+}
+
+/*.ui.selection.dropdown.select .ui.selection.visible.dropdown>.text:not(.default){*/
+/*   color: #966a5b;*/
+/*}*/
+
 .ui.dropdown>.dropdown.icon {
     font-family: Dropdown !important;
 }
@@ -26,6 +38,7 @@
 
 .ui.input.search-input input {
     border: 1px solid #eac7ad;
+    color: #966a5b;
 }
 
 #inputSearch {

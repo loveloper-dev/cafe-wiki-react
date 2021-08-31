@@ -107,7 +107,7 @@ function Join({ history }) {
     }).then((res) => {
       console.log("[Join] join res: ", res);
       if (res.data.resultCode === 200) {
-        alert(res.data.resultMsg);
+        alert(res.data.resultMsg + "\r\n메인화면으로 이동합니다.");
         history.push("/");
       }
     });

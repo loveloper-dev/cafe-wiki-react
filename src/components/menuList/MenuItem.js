@@ -31,8 +31,8 @@ function MenuItem(props) {
           />
         </div>
         <div className="menu-image-wrap">
-          {/*<img src={menu.menu_img_url} />*/}
-          <img src={`${process.env.PUBLIC_URL}/images/menu-info/62.jpeg`} />
+          <img src={menuInfo.menu_img_url} />
+          {/*<img src={`${process.env.PUBLIC_URL}/images/menu-info/62.jpeg`} />*/}
         </div>
         <h3 className="menu-name">{menuInfo.menu_nm_ko}</h3>
         <div className="menu-icon-wrap flex-container flex-wrap justify-sb">

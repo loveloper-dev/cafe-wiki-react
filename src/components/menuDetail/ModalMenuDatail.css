@@ -181,6 +181,10 @@
     border-radius: 0.4rem;
 }
 
+#menuDatail.ui.modal > .content > div:last-child .menu-allergy-wrap.hide {
+    display: none;
+}
+
 #menuDatail.ui.modal > .content > div:last-child .menu-allergy-wrap .menu-allergy-title {
     position: absolute;
     top: -1rem;
@@ -195,8 +199,9 @@
     width: 4rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    background-color: #ddd;
+    background-color: #bbb;
     text-align: center;
+    color: #fff;
 }
 
 #menuDatail.ui.modal > .content > div:last-child .menu-allergy-wrap ul li.danger {
