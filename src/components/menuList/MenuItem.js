@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import "./MenuItem.css";
 import ModalMenuDetail from "../menuDetail/ModalMenuDetail";
+import { useSelector } from "react-redux";
 
 function MenuItem(props) {
   const [isShow, setShow] = useState(false);
+
+  const isLogin = useSelector((state) => state.user.isLogin);
 
   const { menuInfo } = props;
   // const [menu, setMenu] = useState(menuInfo);
@@ -47,6 +50,18 @@ function MenuItem(props) {
               />
             )}
           </p>
+          {isLogin ? (
+            <p className="is-danger-wrap">
+              <img
+                src={`${process.env.PUBLIC_URL}/images/menu-info/${
+                  menuInfo.isDanger ? "danger" : "safe"
+                }.png`}
+              />
+            </p>
+          ) : (
+            <></>
+          )}
+
           <p className="star-rating-wrap flex-container">
             <span>
               <img
